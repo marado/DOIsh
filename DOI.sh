@@ -80,10 +80,14 @@ result=$(wget "http://api.crossref.org/works/$DOI" -o /dev/null -O - | jsawk \
 
 if [ $# -eq 2 ]
 then
-  # TODO: --csv
-  echo "CSV output not implemented yet. Showing regular output:"
+  # TODO: --csv with more info!
+  echo "For now, CSV output support only exports a limited ammount of information:"
   echo ""
-  echo "$result";
+  echo "\"title\";\"publisher\";\"subject\""
+  title=$(echo "$result"|grep ^title|cut -d: -f2|sed -e 's/^[[:space:]]*//')
+  publisher=$(echo "$result"|grep ^publisher|cut -d: -f2|sed -e 's/^[[:space:]]*//')
+  subject=$(echo "$result"|grep ^subject|cut -d: -f2|sed -e 's/^[[:space:]]*//')
+  echo "\"$title\";\"$publisher\";\"$subject\"";
 else
   echo "$result";
 fi
