@@ -8,6 +8,8 @@ possible information about an article, given its DOI.
 
 - [jsawk](https://github.com/micha/jsawk)
 
-### How to use
+### Usage
 
   ./DOI.sh 10.1210/en.2005-0640
+  ./DOI.sh 10.1210/en.2005-0640 --csv
+  ./DOI.sh --csv 10.1210/en.2005-0640
