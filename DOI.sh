@@ -78,6 +78,18 @@ result=$(wget "http://api.crossref.org/works/$DOI" -o /dev/null -O - | jsawk \
   return result;
   ')
 
+if [ "$(echo "$result"|wc -l)" = "1" ]
+then
+  echo "WARNING: DOI not found in traditional DOI databases, trying Google Search...";
+  echo ""
+  # TODO: extract publisher from link
+  google=$(NOCOLOR=1 search "doi:$DOI"|head -n2)
+  link=$(echo "$google"|tail -n1)
+  title=$(wget "$link" -o /dev/null -O -|hxnormalize -x -l 1000 | sed -e :a -re 's/<!.*?>//g;/<!--/N;//ba' | hxselect -c title|cut -d\| -f1| sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+
+  result=$(echo "title: $title"; echo "URL: $link")
+fi
+
 if [ $# -eq 2 ]
 then
   # TODO: --csv with more info!

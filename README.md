@@ -7,6 +7,10 @@ possible information about an article, given its DOI.
 ### Requirements
 
 - [jsawk](https://github.com/micha/jsawk)
+- [bash-cli-google](https://github.com/ilarimakela/bash-cli-google)
+  (Note: at this moment, there is a bug on bash-cli-google that will affect
+  DOIsh usage. Until the fix to that bug is merged upstream, you'll have to use
+  [this fork](https://github.com/marado/bash-cli-google))
 
 ### Usage
 ```
