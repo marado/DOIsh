@@ -28,6 +28,10 @@ else
   DOI=$1
 fi
 
+# check is dependencies are available: jsawk , search
+type jsawk &>/dev/null || { echo "jsawk is not installed, aborting."; exit 1; }
+type search &>/dev/null || { echo "bash-cli-google is not installed, aborting."; exit 1; }
+
 echo "Searching for DOI $DOI:";
 echo ""
 
